@@ -9,7 +9,6 @@ const db = mysql.createConnection({
   database: 'node-app',
 });$
 
-const a =2;
 
 db.connect((err) => {
   if (err) {
