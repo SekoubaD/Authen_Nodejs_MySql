@@ -7,7 +7,7 @@ const db = mysql.createConnection({
   user: 'root',
   password: '',
   database: 'node-app',
-});$
+});
 
 
 db.connect((err) => {
@@ -37,14 +37,23 @@ app.post('/login', (req, res) => {
     if (err) throw err;
 
     if (result.length > 0) {
-      // Utilisateur authentifié, rediriger vers la page de réussite
-      res.sendFile(__dirname + '/success.html');
+      const userProfile = result[0].profile;
+
+      // Check the user's profile and redirect accordingly
+      if (userProfile === 'admin') {
+        res.sendFile(__dirname + '/admin.html');
+      } else if (userProfile === 'user') {
+        res.sendFile(__dirname + '/user.html');
+      } 
+      // res.sendFile(__dirname + '/success.html');
+
     } else {
       // Échec d'authentification, rediriger vers la page d'échec
       res.sendFile(__dirname + '/failure.html');
     }
   });
 });
+
 
 app.post('/register', (req, res) => {
   const { name, email, password } = req.body;
