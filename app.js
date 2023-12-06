@@ -7,7 +7,9 @@ const db = mysql.createConnection({
   user: 'root',
   password: '',
   database: 'node-app',
-});
+});$
+
+const a =2;
 
 db.connect((err) => {
   if (err) {
